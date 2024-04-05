@@ -29,7 +29,7 @@ To run this project locally, follow these steps:
 2. Navigate to the project directory:
 
    ```bash
-   cd hangman-react-game
+   cd hangman
    ```
 
 3. Install dependencies:
