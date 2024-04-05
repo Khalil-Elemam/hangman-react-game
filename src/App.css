@@ -1,38 +1,354 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
   min-height: 100vh;
+  display: grid;
+  place-content: center;
+  background-color: #eee;
+}
+
+.App > div {
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.keys {
+  width: 500px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.character-btn {
+  width: 50px;
+  height: 50px;
+  font-weight: bold;
+  font-size: 1.5rem;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.character-btn.enabled:hover {
+  background-color: rgba(255, 255, 255, 0.595);
+  cursor: pointer;
+}
+
+.hangman {
+  position: relative;
+}
+
+.hangman .stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hangman .stage .base{
+  width: 400px;
+  height: 10px;
+  background-color: black;
+  border-radius: 100vh;
+  -webkit-border-radius: 100vh;
+  -moz-border-radius: 100vh;
+  -ms-border-radius: 100vh;
+  -o-border-radius: 100vh;
+}
+
+.hangman .stage .perpendicular {
+  width: 10px;
+  height: 300px;
+  background-color: black;
+  position: relative;
+}
+
+.hangman .stage .perpendicular::before {
+  content: '';
+  width: 120px;
+  height: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: black;
+}
+
+.hangman .stage .perpendicular::after {
+  content: '';
+  width: 10px;
+  height: 40px;
+  position: absolute;
+  left: 120px;
+  top: 0;
+  background-color: black;
+}
+
+.person {
+  --stroke: 5px;
+  position: absolute;
+  left: calc(50% + 120px);
+  transform: translateX(-50%);
+  top: 39px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}
+
+.person .head {
+  width: 45px;
+  height: 50px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: var(--stroke) solid black;
+}
+
+.person .body {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.person .chest {
+  width: var(--stroke);
+  height: 70px;
+  background-color: black;
+  border-radius: 20px;
+  position: relative;
+  top: -5px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.person .left-hand {
+  position: absolute;
+  width: var(--stroke);
+  height: 80px;
+  background-color: black;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  top: 20px;
+  transform: rotate(120deg);
+  -webkit-transform: rotate(120deg);
+  -moz-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  -o-transform: rotate(120deg);
+  transform-origin: top;
+}
+
+.person .right-hand {
+  width: var(--stroke);
+  height: 80px;
+  background-color: black;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  position: absolute;
+  top: 20px;
+  transform: rotate(-120deg);
+  -webkit-transform: rotate(-120deg);
+  -moz-transform: rotate(-120deg);
+  -ms-transform: rotate(-120deg);
+  -o-transform: rotate(-120deg);
+  transform-origin: top;
+}
+
+.person .right-leg {
+  width: var(--stroke);
+  height: 80px;
+  background-color: black;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  position: absolute;
+  transform-origin: bottom;
+  bottom: 10px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+}
+.person .left-leg {
+    width: var(--stroke);
+    height: 80px;
+    background-color: black;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    position: absolute;
+    transform-origin: bottom;
+    bottom: 10px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+}
+
+.App .word {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  gap: 15px;
+}
+
+.word h3 {
+  font-weight: bold;
+  font-size: 30px;
+  color: red;
+  letter-spacing: 5px;
+}
+
+.word input {
+  width: 30px;
+  border: none;
+  border-bottom: 5px solid black;
+  font-size: 25px;
+  background-color: transparent;
+  outline: none;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+
+.result {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  letter-spacing: 4px;
+  word-spacing: 10px;
+  background-color: white;
+  padding: 10px 30px;
+  width: fit-content;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  margin: 20px auto 0 ;
+}
+
+.footer {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.reload, .hints {
+  background-color: dodgerblue;
+  font-size: 18px;
+  padding: 10px 20px;
   color: white;
+  border: none;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  cursor: pointer;
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.App-link {
-  color: #61dafb;
+.hints {
+  background-color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.reload:hover, .hints:hover {
+  opacity: 0.8;
+}
+
+
+.footer .pop-up {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 70%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.footer .info {
+  background-color: white;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+
+.footer .info .header {
+  border-bottom: 1px solid black;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info .header p {
+  margin: 0;
+  color: red;
+  font-weight: bold;
+}
+
+.info .header button {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.movie-description {
+  line-height: 1.6;
+  padding: 20px 20px ;
 }
