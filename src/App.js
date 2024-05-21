@@ -44,8 +44,8 @@ function App() {
 
 
   async function retrieveMovies() {
-    const apiKey = "57ea676d2aa81c08d763969d4a073b1b"
-    const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${1 + Math.floor(Math.random() * 500)}&sort_by=popularity.desc&api_key=${apiKey}`;
+    const API_KEY = process.env.REACT_APP_API_KEY
+    const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${1 + Math.floor(Math.random() * 500)}&sort_by=popularity.desc&api_key=${API_KEY}`;
     try {
       const response = await fetch(url)
       const data = await response.json()
