@@ -6,7 +6,7 @@
 
 Welcome to Hangman React Game! This is a classic hangman game implemented using React.js. Test your word-guessing skills and have fun with this interactive game.
 
-You can access the deployed version of the game [here](https://velvety-clafoutis-e4b17f.netlify.app/).
+You can access the deployed version of the game [here](https://hangman-react-game.netlify.app/).
 
 ## Features
 
